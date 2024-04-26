@@ -51,10 +51,9 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials: any): Promise<any> {
-        let email = credentials.email ? credentials.email.trim() : "";
-        let password = credentials.password ? credentials.password : "";
-
         try {
+          let email = credentials.email ? credentials.email.trim() : "";
+          let password = credentials.password ? credentials.password : "";
           if (email && password) {
             let user: any = await getUser(email);
 
