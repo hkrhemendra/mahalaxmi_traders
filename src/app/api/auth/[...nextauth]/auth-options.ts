@@ -51,17 +51,17 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {},
       async authorize(credentials: any): Promise<any> {
-        try {
         let email = credentials.email ? credentials.email.trim() : "";
         let password = credentials.password ? credentials.password : "";
+
+        try {
           if (email && password) {
             let user: any = await getUser(email);
-            console.log('User: ', user)
+
             console.log("User: ", user);
             if (!user)
               throw new Error(`User with email ${email} does not exist`);
             if (user?.error)
-              console.log("User error: ", user.error)
               throw new Error(
                 "Something went wrong wrong. Please try again later"
               );

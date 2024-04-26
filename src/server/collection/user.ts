@@ -1,8 +1,7 @@
 export async function getUser(email: string) {
   try {
-    const user = await fetch(`/api/user?email=${email}`);
+    const user = await fetch(`${process.env.NEXTAUTH_URL}/api/user?email=${email}`);
     const jsonResponse = await user.json();
-    console.log('Get User Response: ', jsonResponse);
     if (jsonResponse.status === 200) {
       return {
         data: jsonResponse.data,

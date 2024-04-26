@@ -4,6 +4,7 @@ const nextConfig = {
         MONGO_URL: 'mongodb+srv://dhan36677:bOemuQMym9lpATS3@cluster0.qr2tmi1.mongodb.net',
         NEXTAUTH_SECRET: 'ldfjalsdjflasjkdflkajdslf',
         JWT_SECRET: 'SECRET',
+        URL_API: 'http://localhost:300'
     }
 };
 
