@@ -1,6 +1,6 @@
 export async function getUser(email: string) {
   try {
-    const user = await fetch(`http://localhost:3000/api/user?email=${email}`);
+    const user = await fetch(`/api/user?email=${email}`);
     const jsonResponse = await user.json();
     console.log('Get User Response: ', jsonResponse);
     if (jsonResponse.status === 200) {
