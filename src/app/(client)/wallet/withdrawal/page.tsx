@@ -124,7 +124,7 @@ export default function Login() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Login
+                Submit
             </Button>
           </form>
         </Form>

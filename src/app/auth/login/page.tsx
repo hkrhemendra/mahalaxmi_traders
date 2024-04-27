@@ -50,7 +50,7 @@ export default function Login() {
   return (
     <div className="flex flex-1 flex-wrap justify-center items-center h-[100vh]">
       <CardWrapper
-        label="Create an account"
+        label="Login"
         backButtonHref="/"
         backButtonLabel="Home"
       >

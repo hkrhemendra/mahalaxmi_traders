@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+import toast from "react-hot-toast";
 import { WalletSchema } from "@/schema";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -62,11 +62,11 @@ export default function CreateWallet() {
       const jsonResponse = await response.json();
       console.log("JSON response:", jsonResponse);
       if (jsonResponse.status === 200) {
-        setStatus("The user has successfully registered");
+        toast.success("The wallet was successfully saved");
       }
     } catch (error) {
       console.log("Error: ", error);
-      setStatus("Something went wrong. Please try again later");
+      toast.error("Something went wrong. Please try again later");
     }
   }
 
