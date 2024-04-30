@@ -6,7 +6,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { adminMenu, menu } from "@/constants/menu";
+import { adminMenu, defaultMenu, menu } from "@/constants/menu";
 import { Menu } from "@/type/menu";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -33,7 +33,94 @@ export default function Navbar() {
         setIsAdmin(true);
       }
     }
-  }, [0]);
+  }, [session]);
+
+
+  const getDesktopMenu = () => {
+    if (isAdmin) {
+      return (
+        <>
+          {adminMenu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4 font-semibold m-auto rounded-xl  cursor-pointer duration-300 "
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+        </>
+      );
+    } else if (isLogin) {
+      return (
+        <>
+          {menu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4 font-semibold rounded-xl m-2 cursor-pointer duration-300 "
+            >
+              {<Link href={item.href}>{item.name}</Link>}
+            </li>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {defaultMenu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4rounded-xl m-2 cursor-pointer duration-300 "
+            >
+              {<Link href={item.href}>{item.name}</Link>}
+            </li>
+          ))}
+        </>
+      );
+    }
+  };
+
+  const getMobileMenu = () => {
+    if (isAdmin) {
+      return (
+        <>
+          {adminMenu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4 border-b text-gray-900 font-semibold rounded-xl  duration-300  cursor-pointer border-gray-600"
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+        </>
+      );
+    } else if (isLogin) {
+      return (
+        <>
+          {menu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4 border-b text-gray-900 font-semibold rounded-xl  duration-300  cursor-pointer border-gray-600"
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+        </>
+      );
+    } else {
+      return (
+        <>
+          {defaultMenu.map((item: Menu) => (
+            <li
+              key={item.name}
+              className="p-4 text-gray-900 border-b rounded-xl  duration-300  cursor-pointer border-gray-600"
+            >
+              <Link href={item.href}>{item.name}</Link>
+            </li>
+          ))}
+        </>
+      );
+    }
+  };
 
   async function logout() {
     console.log("Logout: ");
@@ -41,71 +128,25 @@ export default function Navbar() {
   }
 
   return isLogin ? (
-    <div className="z-20" >
-      <nav className="hidden fixed inset-x-0 top-0 z-50 bg-white shadow-sm ">
-        <div className="w-full max-w-7xl mx-auto px-4">
-          <div className="flex justify-between h-14 items-center">
-            <Link className="flex items-center" href="#">
-              <MountainIcon className="h-6 w-6" />
-              <span className="text-black">MahaLaxmi Traders</span>
-            </Link>
-            <nav className="hidden md:flex gap-4">
-              {isAdmin
-                ? adminMenu.map((ele: Menu) => (
-                    <Link
-                      key={ele.name}
-                      className="font-medium flex items-center text-sm transition-colors hover:underline"
-                      href={ele.href}
-                    >
-                      {ele.name}
-                    </Link>
-                  ))
-                : menu.map((ele: Menu) => (
-                    <Link
-                      key={ele.name}
-                      className="font-medium flex items-center text-sm transition-colors hover:underline"
-                      href={ele.href}
-                    >
-                      {ele.name}
-                    </Link>
-                  ))}
-            </nav>
-            <div className="flex items-center gap-4">
-              <Button size="sm" variant="outline" onClick={() => logout()}>
-                Sign Out
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+    <div className="z-20 bg-gray-900">
 
-      <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black">
+      <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white bg-gray-900 border-b ">
         {/* Logo */}
         <h1 className="w-full text-2xl font-bold ">MahaLaxmi Traders</h1>
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex">
-          {isAdmin
-            ? adminMenu.map((item) => (
-                <li
-                  key={item.name}
-                  className="p-4  rounded-xl m-2 cursor-pointer duration-300 "
-                >
-                  <Link href={item.href}>{item.name}</Link>
-                </li>
-              ))
-            : menu.map((item) => (
-                <li
-                  key={item.name}
-                  className="p-4  rounded-xl m-2 cursor-pointer duration-300 "
-                >
-                  {<Link href={item.href}>{item.name}</Link>}
-                </li>
-              ))}
-          <li className="p-4  rounded-xl m-2 cursor-pointer duration-300 ">
-            <Button size="sm" variant="outline" onClick={() => logout()}>
-              Sign Out
-            </Button>
+          {getDesktopMenu()}
+          <li className="p-4 rounded-xl m-2 cursor-pointer duration-300 ">
+            {isAdmin && isLogin ? (
+              <Button className="text-black" size="sm" variant="outline" onClick={() => logout()}>
+                Sign Out
+              </Button>
+            ) : (
+              <Button className="text-black" size="sm" variant="default">
+                <Link href={"/auth/login"}>Sign In</Link>
+              </Button>
+            )}
           </li>
         </ul>
 
@@ -128,27 +169,17 @@ export default function Navbar() {
           </h1>
 
           {/* Mobile Navigation Items */}
-          {isAdmin
-            ? adminMenu.map((item) => (
-                <li
-                  key={item.name}
-                  className="p-4 border-b rounded-xl  duration-300  cursor-pointer border-gray-600"
-                >
-                  <Link href={item.href}>{item.name}</Link>
-                </li>
-              ))
-            : menu.map((item) => (
-                <li
-                  key={item.name}
-                  className="p-4 border-b rounded-xl  duration-300  cursor-pointer border-gray-600"
-                >
-                  <Link href={item.href}>{item.name}</Link>
-                </li>
-              ))}
+          {getMobileMenu()}
           <li className="p-4  rounded-xl m-2 cursor-pointer duration-300 ">
-            <Button size="sm" variant="outline" onClick={() => logout()}>
-              Sign Out
-            </Button>
+            {isAdmin && isLogin ? (
+              <Button size="sm" className="text-black" variant="outline" onClick={() => logout()}>
+                Sign Out
+              </Button>
+            ) : (
+              <Button className="text-black" size="sm" variant="default">
+                <Link href={"/auth/login"}>Sign In</Link>
+              </Button>
+            )}
           </li>
         </ul>
       </div>

@@ -45,3 +45,18 @@ export const adminMenu: Menu[] = [
     href: "/profile",
   },
 ];
+
+export const defaultMenu: Menu[] = [
+  {
+    name: "Home",
+    href: "/",
+  },
+  {
+    name: "Services",
+    href: "#services",
+  },
+  {
+    name: "Open Account",
+    href: "#open_account",
+  },
+]
