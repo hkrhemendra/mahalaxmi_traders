@@ -6,23 +6,9 @@ export default function Footer() {
     <div className="container mx-auto flex flex-col items-center gap-6 px-4 md:flex-row md:justify-between md:px-6">
       <div className="flex items-center gap-2">
         <ViewIcon className="h-6 w-6" />
-        <span className="font-bold">Traders Hub</span>
+        <span className="font-bold">Mahalaxmi Traders</span>
       </div>
-      <nav className="flex flex-wrap items-center gap-4">
-        <Link className="hover:underline" href="#">
-          Home
-        </Link>
-        <Link className="hover:underline" href="#">
-          Services
-        </Link>
-        <Link className="hover:underline" href="#">
-          Pricing
-        </Link>
-        <Link className="hover:underline" href="#">
-          Contact
-        </Link>
-      </nav>
-      <div className="flex items-center gap-4">
+      {/* <div className="flex items-center gap-4">
         <Link className="hover:text-gray-400" href="#">
           <TwitterIcon className="h-6 w-6" />
         </Link>
@@ -32,7 +18,7 @@ export default function Footer() {
         <Link className="hover:text-gray-400" href="#">
           <GithubIcon className="h-6 w-6" />
         </Link>
-      </div>
+      </div> */}
       <p className="text-sm text-gray-400">© 2024 Traders Hub. All rights reserved.</p>
     </div>
   </footer>
