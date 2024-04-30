@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import toast from "react-hot-toast";
+import Shimmer from "@/components/simmer";
 
 const columns: string[] = [
   "ID",
@@ -32,8 +33,10 @@ const columns: string[] = [
 
 export function UserTable() {
   const [data, setData] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getAllUsers = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`/api/user`);
       const jsonResponse = await response.json();
@@ -42,6 +45,7 @@ export function UserTable() {
     } catch (error) {
       console.log("Error: ", error);
     }
+    setIsLoading(false);
   };
 
   const deleteUser = async (id: string) => {
@@ -64,7 +68,9 @@ export function UserTable() {
     getAllUsers();
   }, []);
 
-  return (
+  return isLoading ? (
+    <Shimmer />
+  ) : (
     <Table>
       <TableCaption>A list of your users</TableCaption>
       <TableHeader>

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import toast from "react-hot-toast";
+import Shimmer from "@/components/simmer";
 
 const columns: string[] = [
   "Date",
@@ -30,8 +31,10 @@ const columns: string[] = [
 
 export function PortfolioDataTable() {
   const [data, setData] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const getAllUsers = async () => {
+    setIsLoading(false);
     try {
       const response = await fetch(`/api/portfolio`);
       const jsonResponse = await response.json();
@@ -40,6 +43,7 @@ export function PortfolioDataTable() {
     } catch (error) {
       console.log("Error: ", error);
     }
+    setIsLoading(true);
   };
 
   //   const deleteUser = async (id: string) => {
@@ -64,33 +68,34 @@ export function PortfolioDataTable() {
 
   return (
     <div className="overflow-x w-full">
-      <Table className="table-auto overflow-scroll w-full" >
-        <TableCaption>List of Portfolio</TableCaption>
-        <TableHeader>
-          <TableRow className="text-center">
-            {columns.map((column: string) => (
-              <TableHead key={column} className="text-center w-[100px]">
-                {column}
-              </TableHead>
-            ))}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map((ele: any) => (
-            <TableRow className="text-center" key={ele._id}>
-              <TableCell className="font-medium">
-                {ele.date?.split("T")[0]}
-              </TableCell>
-              <TableCell>{ele?.user?.name}</TableCell>
-              <TableCell>{ele.stock_name}</TableCell>
-              <TableCell className="">{ele.buy_price}</TableCell>
-              <TableCell className="">{ele.buy_quantity}</TableCell>
-              <TableCell className="">{ele.sell_price}</TableCell>
-              <TableCell className="">{ele.sell_quantity}</TableCell>
-              <TableCell className="">{ele.profit ?? 0}</TableCell>
-              <TableCell className="">{ele.loss ?? 0}</TableCell>
+      {isLoading ? (
+        <Table className="table-auto overflow-scroll w-full">
+          <TableCaption>List of Portfolio</TableCaption>
+          <TableHeader>
+            <TableRow className="text-center">
+              {columns.map((column: string) => (
+                <TableHead key={column} className="text-center w-[100px]">
+                  {column}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map((ele: any) => (
+              <TableRow className="text-center" key={ele._id}>
+                <TableCell className="font-medium">
+                  {ele.date?.split("T")[0]}
+                </TableCell>
+                <TableCell>{ele?.user?.name}</TableCell>
+                <TableCell>{ele.stock_name}</TableCell>
+                <TableCell className="">{ele.buy_price}</TableCell>
+                <TableCell className="">{ele.buy_quantity}</TableCell>
+                <TableCell className="">{ele.sell_price}</TableCell>
+                <TableCell className="">{ele.sell_quantity}</TableCell>
+                <TableCell className="">{ele.profit ?? 0}</TableCell>
+                <TableCell className="">{ele.loss ?? 0}</TableCell>
 
-              {/* <TableCell className="flex gap-5 justify-center">
+                {/* <TableCell className="flex gap-5 justify-center">
               <Button variant={"outline"}>
                 {" "}
                 <Link href={`/admin/users/${ele._id}`} ><CiEdit className="text-xl" />{" "}</Link>
@@ -100,10 +105,13 @@ export function PortfolioDataTable() {
                 <MdDeleteOutline className="text-xl" />{" "}
               </Button>
             </TableCell> */}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <Shimmer />
+      )}
     </div>
   );
 }
