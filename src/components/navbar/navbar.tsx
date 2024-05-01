@@ -138,7 +138,7 @@ export default function Navbar() {
         <ul className="hidden md:flex">
           {getDesktopMenu()}
           <li className="p-4 rounded-xl m-2 cursor-pointer duration-300 ">
-            {isAdmin && isLogin ? (
+            {isAdmin || isLogin ? (
               <Button className="text-black" size="sm" variant="outline" onClick={() => logout()}>
                 Sign Out
               </Button>
@@ -171,7 +171,7 @@ export default function Navbar() {
           {/* Mobile Navigation Items */}
           {getMobileMenu()}
           <li className="p-4  rounded-xl m-2 cursor-pointer duration-300 ">
-            {isAdmin && isLogin ? (
+            {isAdmin || isLogin ? (
               <Button size="sm" className="text-black" variant="outline" onClick={() => logout()}>
                 Sign Out
               </Button>
