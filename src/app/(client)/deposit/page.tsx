@@ -28,13 +28,19 @@ export default function QrCode() {
   return (
     <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-5">
       {qr && (
-        <div className="w-full lg:w-1/2 flex justify-center items-center" >
+        <div className="w-full flex justify-center items-center" >
           <CardWrapper
             label="Deposit"
             backButtonHref="/wallet/"
             backButtonLabel="Back"
           >
-            <div className="w-full flex justify-center">
+            <div className="w-full flex flex-col lg:flex-row justify-center gap-20 items-center">
+              <div>
+                <h3>Account Holder Name: Maha Laxmi</h3>
+                <h3>Bank Name: ICICI BANK</h3>
+                <h3>Account Number: 216501001886 </h3>
+                <h3>IFSC Code: ICIC0000555</h3>
+              </div>
               <img
                 className="w-[300px]"
                 src={qr}
