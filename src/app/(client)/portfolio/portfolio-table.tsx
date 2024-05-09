@@ -42,6 +42,7 @@ export function PortfolioTable() {
   const getPortfolio = async () => {
     setIsLoading(true);
     try {
+      console.log('UserID: ', userId)
       const response = await fetch(`/api/portfolio/?user=${userId}`);
       const jsonResponse = await response.json();
       console.log("Portfolio: ", jsonResponse);

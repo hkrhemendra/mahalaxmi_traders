@@ -1,6 +1,7 @@
 import connectDB from "@/lib/connectDB";
 import Portfolio from "@/model/portfolio";
 import User from "@/model/user";
+import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest){
@@ -10,10 +11,12 @@ export async function GET(req: NextRequest){
         const userId = searchParams.get('user'); 
         let user;
         if(userId){
-            user = await User.findById(userId);
+            user = await User.findById(new ObjectId(userId));
         }
 
-        const portfolio = user ? await Portfolio.find({user:user?._io}).populate({path: 'user', model: User}) : await Portfolio.find().populate({path: 'user', model: User});
+        console.log('User: ', user)
+
+        const portfolio = user ? await Portfolio.find({user:user?._id}).populate({path: 'user', model: User}) : await Portfolio.find().populate({path: 'user', model: User});
 
         return NextResponse.json({
             status: 200,
