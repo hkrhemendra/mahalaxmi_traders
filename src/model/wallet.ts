@@ -4,8 +4,7 @@ import mongoose, { Schema } from "mongoose";
 const WalletSchema = new mongoose.Schema(
   {
     invested_amount: { type: String, required: true },
-    net_profit: { type: String, required: true },
-    net_loss: { type: String, required: true },
+    transaction_type: { type: String, required: true },
     user: {
       type: Schema.Types.ObjectId,
       ref: "user",

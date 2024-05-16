@@ -76,14 +76,9 @@ export const WalletSchema = z.object({
     (a) => parseInt(z.string().parse(a), 10),
     z.number().gte(0, "Must be 1 and above")
   ),
-  net_profit: z.preprocess(
-    (a) => parseInt(z.string().parse(a)),
-    z.number().optional()
-  ),
-  net_loss: z.preprocess(
-    (a) => parseInt(z.string().parse(a)),
-    z.number().optional()
-  ),
+  transaction_type:z.string().min(1, {
+    message: "Stock Name is require and must of 3 characters",
+  }),
   email: z.string().email({
     message: "Please enter valid email address",
   }),

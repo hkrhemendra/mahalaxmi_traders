@@ -14,7 +14,7 @@ import { getUserByEmail } from "@/lib/getUserData";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-const columns: string[] = ["Invested Amount", "Net Profit", "Net Loss"];
+const columns: string[] = ["Invested Amount", "Transaction Type", "TimeStamp"];
 
 export function WalletTable() {
   const [userId, setUserId] = useState();
@@ -73,8 +73,8 @@ export function WalletTable() {
         {walletData.map((ele: any) => (
           <TableRow className="text-center" key={ele._id}>
             <TableCell className="font-medium">{ele.invested_amount}</TableCell>
-            <TableCell>{ele.net_profit}</TableCell>
-            <TableCell>{ele.net_loss}</TableCell>
+            <TableCell>{ele?.transaction_type}</TableCell>
+            <TableCell>{ele.createdAt.split('T')[0]}</TableCell>
           </TableRow>
         ))}
       </TableBody>

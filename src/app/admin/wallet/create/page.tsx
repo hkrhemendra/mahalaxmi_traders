@@ -31,8 +31,7 @@ export default function CreateWallet() {
     defaultValues: {
       email: "",
       invested_amount: 0,
-      net_loss: 0,
-      net_profit: 0
+      transaction_type: "",
     },
   });
 
@@ -54,8 +53,7 @@ export default function CreateWallet() {
         },
         body: JSON.stringify({
           invested_amount: data?.invested_amount,
-          net_profit: data?.net_profit,
-          net_loss: data?.net_loss,
+          transaction_type: data?.transaction_type,
           user: user?._id,
         }),
       });
@@ -126,7 +124,7 @@ export default function CreateWallet() {
                   <FormItem>
                     <FormLabel>Invested Amount</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" placeholder="0" />
+                      <Input {...field} type="number" placeholder="XXXXX" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -134,25 +132,12 @@ export default function CreateWallet() {
               />
               <FormField
                 control={form.control}
-                name="net_profit"
+                name="transaction_type"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Net Profit</FormLabel>
+                    <FormLabel>Transaction Type</FormLabel>
                     <FormControl>
-                      <Input {...field} type="number" placeholder="0" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="net_loss"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Net Loss</FormLabel>
-                    <FormControl>
-                      <Input {...field} type="number" placeholder="0" />
+                      <Input {...field} type="text" placeholder="Deposit / Withdrawal" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

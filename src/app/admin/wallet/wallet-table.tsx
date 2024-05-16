@@ -20,8 +20,8 @@ import Shimmer from "@/components/simmer";
 const columns: string[] = [
   "User Name",
   "Invested Amount",
-  "Net Profit",
-  "Net Loss",
+  "Transaction Type",
+  "Time",
 ];
 
 export function WalletDataTable() {
@@ -40,22 +40,6 @@ export function WalletDataTable() {
     }
     setIsLoading(false);
   };
-
-  //   const deleteUser = async (id: string) => {
-  //     try {
-  //       const response = await fetch(`/api/user/${id}`, {
-  //         method: 'DELETE'
-  //       })
-  //       const jsonResponse = await response.json();
-  //       console.log('Delete Response: ', jsonResponse)
-  //       if(jsonResponse.status = 200){
-  //         toast.success('Deleted Successfully')
-  //         getAllUsers()
-  //       }
-  //     } catch (error) {
-  //       console.log('Error: ', error)
-  //     }
-  //   }
 
   useEffect(() => {
     getAllWalletData();
@@ -83,19 +67,9 @@ export function WalletDataTable() {
                 <TableCell>{ele?.user?.name}</TableCell>
                 <TableCell>{ele.invested_amount}</TableCell>
                 <TableCell className="text-green-500">
-                  {ele.net_profit}
+                  {ele?.transaction_type}
                 </TableCell>
-                <TableCell className="text-red-500">{ele.createdAt}</TableCell>
-                {/* <TableCell className="flex gap-5 justify-center">
-                <Button variant={"outline"}>
-                  {" "}
-                  <Link href={`/admin/users/${ele._id}`} ><CiEdit className="text-xl" />{" "}</Link>
-                </Button>
-                <Button>
-                  {" "}
-                  <MdDeleteOutline className="text-xl" />{" "}
-                </Button>
-              </TableCell> */}
+                <TableCell className="text-red-500">{ele.createdAt.split('T')[0]}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -38,14 +38,11 @@ export async function POST(req: NextRequest) {
 
     const body: any = await req.json();
     console.log("Body: ", body);
-    const { invested_amount, net_profit, net_loss, user } = body;
-
-    // const hashPassword = await bcrypt.hashSync(password, 10);
+    const { invested_amount, transaction_type, user } = body;
 
     const wallet = await Wallet.create({
       invested_amount,
-      net_profit,
-      net_loss,
+      transaction_type,
       user,
     });
 
