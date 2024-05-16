@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
     }
 
     const wallet = user
-      ? await Wallet.find({ user: user?._io }).populate({
+      ? await Wallet.find({ user: user?._id }).populate({
           path: "user",
           model: User,
         })

@@ -17,9 +17,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CreateWallet() {
   const [user, setUser] = useState<any>({});
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   let id = "";
   const [status, setStatus] = useState<any>();
@@ -35,15 +37,14 @@ export default function CreateWallet() {
   });
 
   async function onSubmit(data: z.infer<typeof WalletSchema>) {
+    
     console.log("Data ---> ", data);
-
+    setIsLoading(true);
     try {
       const user: any = await getUserByEmail(data?.email);
       console.log("User ----> ", user);
       if (!user) {
-        return setStatus(
-          "Please enter valid email address. Given email address is not registered."
-        );
+        return toast("Please enter valid email address. Given email address is not registered.");
       }
 
       const response = await fetch("/api/wallet/", {
@@ -60,7 +61,7 @@ export default function CreateWallet() {
       });
 
       const jsonResponse = await response.json();
-      console.log("JSON response:", jsonResponse);
+      console.log("JSON Creation API:", jsonResponse);
       if (jsonResponse.status === 200) {
         toast.success("The wallet was successfully saved");
       }
@@ -68,6 +69,7 @@ export default function CreateWallet() {
       console.log("Error: ", error);
       toast.error("Something went wrong. Please try again later");
     }
+    setIsLoading(false);
   }
 
   const getUserByEmail = async (email: string) => {
@@ -94,7 +96,10 @@ export default function CreateWallet() {
         backButtonHref="/admin/wallet/"
         backButtonLabel="Back"
       >
-        <Form {...form}>
+        {
+          isLoading ? <Skeleton/> : 
+          <Form {...form}>
+
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="space-y-4">
               <FormField
@@ -160,6 +165,8 @@ export default function CreateWallet() {
             </Button>
           </form>
         </Form>
+        }
+       
       </CardWrapper>
     </div>
   );

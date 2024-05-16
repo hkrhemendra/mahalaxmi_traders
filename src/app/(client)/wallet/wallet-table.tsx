@@ -32,6 +32,7 @@ export function WalletTable() {
   const getWallet = async () => {
     setIsLoading(true);
     try {
+      console.log('UserID: ', userId)
       const response = await fetch(`/api/wallet/?user=${userId}`);
       const jsonResponse = await response.json();
       console.log("Wallet: ", jsonResponse);

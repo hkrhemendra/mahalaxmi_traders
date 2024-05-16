@@ -85,7 +85,7 @@ export function WalletDataTable() {
                 <TableCell className="text-green-500">
                   {ele.net_profit}
                 </TableCell>
-                <TableCell className="text-red-500">{ele.net_loss}</TableCell>
+                <TableCell className="text-red-500">{ele.createdAt}</TableCell>
                 {/* <TableCell className="flex gap-5 justify-center">
                 <Button variant={"outline"}>
                   {" "}

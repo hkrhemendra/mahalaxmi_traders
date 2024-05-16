@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     }
 
     const withdrawal = user
-      ? await Withdrawal.find({ user: user?._io }).populate({
+      ? await Withdrawal.find({ user: user?._id }).populate({
           path: "user",
           model: User,
         })

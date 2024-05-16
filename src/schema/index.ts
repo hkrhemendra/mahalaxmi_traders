@@ -77,12 +77,12 @@ export const WalletSchema = z.object({
     z.number().gte(0, "Must be 1 and above")
   ),
   net_profit: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().gte(0, "Must be 1 and above")
+    (a) => parseInt(z.string().parse(a)),
+    z.number().optional()
   ),
   net_loss: z.preprocess(
-    (a) => parseInt(z.string().parse(a), 10),
-    z.number().gte(0, "Must be 1 and above")
+    (a) => parseInt(z.string().parse(a)),
+    z.number().optional()
   ),
   email: z.string().email({
     message: "Please enter valid email address",
