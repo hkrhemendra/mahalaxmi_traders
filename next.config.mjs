@@ -5,6 +5,7 @@ const nextConfig = {
         NEXTAUTH_SECRET: 'ldfjalsdjflasjkdflkajdslf',
         JWT_SECRET: 'SECRET',
         URL_API: 'https://mahalaxmi-traders.vercel.app/'
+        // URL_API: 'http://localhost:3001'
     }
 };
 

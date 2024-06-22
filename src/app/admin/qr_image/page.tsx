@@ -26,6 +26,8 @@ export default function QrImage() {
   }, [])
 
   return (
+    <>
+    <div>
     <div className="flex flex-col lg:flex-row justify-around items-center gap-5 lg:items-center">
       {
         qr && (
@@ -37,6 +39,16 @@ export default function QrImage() {
       <div className="w-full flex justify-center" >
         <UpdateQr />
       </div>
+      
     </div>
+    <div className="flex flex-col flex-wrap w-full h-full justify-center items-center">
+        <p>Name: MAHALAXMI TRADER</p>
+        <p>Account number: 10183213142</p>
+        <p>IFSC: IDFB0042741</p>
+        <p>Bank name: IDFC FIRST</p>
+      </div>
+    </div>
+    </>
+  
   );
 }
