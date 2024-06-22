@@ -26,30 +26,38 @@ export default function QrCode() {
   }, []);
 
   return (
-    <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-5">
-      {qr && (
-        <div className="w-full flex justify-center items-center" >
-          <CardWrapper
-            label="Deposit"
-            backButtonHref="/wallet/"
-            backButtonLabel="Back"
-          >
-            <div className="w-full flex flex-col lg:flex-row justify-center gap-20 items-center">
-              {/* <div>
+    <>
+      <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-5">
+        {qr && (
+          <div className="w-full flex justify-center items-center">
+            <CardWrapper
+              label="Deposit"
+              backButtonHref="/wallet/"
+              backButtonLabel="Back"
+            >
+              <div className="w-full flex flex-col lg:flex-row justify-center gap-20 items-center">
+                {/* <div>
                 <h3>Account Holder Name: Maha Laxmi</h3>
                 <h3>Bank Name: ICICI BANK</h3>
                 <h3>Account Number: 216501001886 </h3>
                 <h3>IFSC Code: ICIC0000555</h3>
               </div> */}
-              <img
-                className="w-[300px]"
-                src={qr}
-                alt="Sorry no image available right now"
-              />
-            </div>
-          </CardWrapper>
-        </div>
-      )}
-    </div>
+                <img
+                  className="w-[300px]"
+                  src={qr}
+                  alt="Sorry no image available right now"
+                />
+              </div>
+            </CardWrapper>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col flex-wrap w-full h-full justify-center items-center">
+        <p>Name: MAHALAXMI TRADER</p>
+        <p>Account number: 10183213142</p>
+        <p>IFSC: IDFB0042741</p>
+        <p>Bank name: IDFC FIRST</p>
+      </div>
+    </>
   );
 }
